@@ -15,17 +15,15 @@ int main(){
 	int pos_h, pos_v, raio, estilo, digito;
 
 	scanf("%d %d", &tamanho, &cor);
+
 	cria_matriz (tamanho, cor);
-
-
-
 	pinta_matriz(tamanho, cor);
 
 	while (1){
 		do{
 			scanf("%d %d", &pos_h, &pos_v);
 				if (pos_h == -1 || pos_v == -1){
-						imprime_matriz (tamanho);
+						printf("\nPROGRAMA SENDO ENCERRADO\n");
 						return (0);
 					}
 			scanf("%d %d %d", &digito, &raio, &estilo);
@@ -42,6 +40,7 @@ int main(){
 				quadrado_cheio (pos_h, pos_v, raio, digito, tamanho);
 				break;
 		}
+		imprime_matriz(tamanho);
 	}
 
 	libera_matriz(tamanho);
@@ -58,6 +57,7 @@ void imprime_matriz (int tamanho){
 			printf("%d ", inicial[aux+cont_2]);
 		}
 	}
+	printf("\n");
 }
 void pinta_matriz (int tamanho, int cor){
 	int cont_1, cont_2;
@@ -121,11 +121,6 @@ void quadrado_bordas (int horizontal, int vertical, int raio, int cor, int taman
 		aux = cont_1 * tamanho;
 		inicial[aux+aux_direita] = cor;
 	}
-	// // Teste
-	// 	for (cont_1 = 0; cont_1 < tamanho; cont_1++){
-	// 		aux = 2 * tamanho;
-	// 		inicial[aux+cont_1] = cor;
-	// 	}
 }
 void quadrado_cheio (int horizontal, int vertical, int raio, int cor, int tamanho){
 	int cont_1, cont_2;
