@@ -26,8 +26,8 @@ int main(){
 		printf("Digite o %d%c, numero de reservados\n", cont, BOL);
 			scanf("%d", &voo[cont].nmarc);
 
-		if (realocar >= 4){
-			voo = (aviao *) realloc (voo, sizeof(aviao)*cont);
+		if (realocar >= 5){
+			voo = (aviao *) realloc (voo, sizeof(aviao)*(cont+5));
 			realocar = 0;
 			if (!voo){
 				printf("\nNAO FOI POSSIVEL ALOCAR\n");
@@ -37,10 +37,8 @@ int main(){
 	}
 				fwrite (voo, sizeof(aviao), cont, arquivo);
 				fclose (arquivo);
+				free(voo);
 				
-				while (cont--){
-					voo = NULL;
-				}
 			
 	printf("\nPROGRAMA SENDO ENCERRADO\n");
 	return(0);
