@@ -16,7 +16,8 @@ int main(){
 	FILE *arquivo = fopen("Texto.txt", "rt");
 
 	if (!arquivo){
-		fprintf(stderr, "\nVAI DA NAO PRO ARQUIVO\n");
+		fprintf(stderr, "\nARQUIVO NAO PODE SER ABERTO\n");
+		return (0);
 	}
 
 	do {
@@ -63,6 +64,4 @@ int main(){
 	printf("ESPACOS: %d\n", espacos);
 	printf("TABULACAO: %d\n", tabulacao);	
 	printf("SIMBOLOS: %d\n", simbolos);
-
-
 }
