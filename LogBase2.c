@@ -1,15 +1,11 @@
 #include <stdio.h>
 
 int LogBase2 (int num){
-	int loga = 0;
 
 	if (num == 1){
 		return (0);
 	}
-
-	loga++;
-	loga += LogBase2(num/2);
-		return (loga);
+		return ( LogBase2(num/2));
 }
 
 int main(){
