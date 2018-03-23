@@ -27,7 +27,7 @@ void le_matriz (int *matriz, int tamanho){
 	for (cont_1 = 0; cont_1 < tamanho; cont_1++){
 		for (cont_2 = 0; cont_2 < tamanho; cont_2++){
 			int aux = cont_1 * tamanho;
-			scanf("%i", matriz+aux+cont_2);
+			scanf("%d", &matriz[aux+cont_2]);
 		}
 	}
 }
@@ -38,7 +38,7 @@ void imprime_matriz (int *matriz, int tamanho){
 		printf("\n");
 		for (cont_2 = 0; cont_2 < tamanho; cont_2++){
 			int aux = cont_1 * tamanho;
-			printf("%i ", *(matriz+aux+cont_2));
+			printf("%i ", matriz[aux+cont_2]);
 		}
 	}
 }
