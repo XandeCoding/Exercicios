@@ -12,9 +12,8 @@ int main(){
 	le_matriz();
 	teste_sudoku1();
 	teste_sudoku2();
-
-
 }
+
 void le_matriz(){
 	int cont_1, cont_2;
 
@@ -68,12 +67,6 @@ int teste_sudoku2 (){
 				total = *esq_cima + *meio_cima + *dir_cima +
 					*esq_meio +* centro + *dir_meio +
 					*esq_baixo + *meio_baixo + *dir_baixo;
-			// TESTE
-			// 		printf("\nTOTAL %d\n", total);
-
-			// printf("\nesq_cima %i, meio_cima %i, dir_cima %i, esq_meio %i, centro %i, dir_meio %i, esq_baixo %i, meio_baixo %i, dir_baixo %i\n", 
-			// 	*esq_cima, *meio_cima, *dir_cima,*esq_meio, *centro, *dir_meio, *esq_baixo, *meio_baixo, *dir_baixo);
-				if (total != 45){
 					printf("\ntotal %i invalido", total);
 					exit(0);
 				}
@@ -86,4 +79,3 @@ int teste_sudoku2 (){
 	
 
 
-}
