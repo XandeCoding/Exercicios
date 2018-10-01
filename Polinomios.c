@@ -7,53 +7,55 @@ typedef struct {
     int expoente;
 }polinomios;
  
-    polinomios polinomio_1[50], polinomio_2[50], polinomio_3[100];
+    polinomios polinomio_1[100];
+	int posicao;
  
-void le_polinomio (polinomios *polinomio, int tamanho);
-void imprime_polinomio (polinomios *polinomio, int tamanho);
-int soma_polinomio (int tam_poli_1, int tam_poli_2);
-int subtrai_polinomio (int tam_poli_1, int tam_poli_2);
+void le_polinomio (polinomios *polinomio);
+void imprime_polinomio (polinomios *polinomio);
+int add_num (char operacao);
  
 int main(){
-    int casos_teste, tam_polinomio_1, tam_polinomio_2, tamanho_total = 0;
+    int casos_teste, tamanho, tam_polinomio_1, tam_polinomio_2, tamanho_total = 0;
     char operacao;
+	polinomios aux;
  
     scanf("%d", &casos_teste);
  
     while (casos_teste--){
         getchar();
         scanf("%c", &operacao);
-            scanf("%d", &tam_polinomio_1);
-            le_polinomio (polinomio_1, tam_polinomio_1);
+
+			printf ("\nDigite o tamanho do polinomio 1\n");
+            scanf("%d", &tamanho);
+			posicao = tamanho;
+			printf ("\nDigite os valores do polinomio seguidos pelo expoente\n");
+            le_polinomio (polinomio_1);
  
-            scanf("%d", &tam_polinomio_2);
-            le_polinomio  (polinomio_2, tam_polinomio_2);
- 
- 
-        if (operacao == '+'){
-            tamanho_total = soma_polinomio (tam_polinomio_1,tam_polinomio_2);
-        }
- 
-        if (operacao == '-'){
-            tamanho_total = subtrai_polinomio (tam_polinomio_1, tam_polinomio_2);
-        }
-    imprime_polinomio (polinomio_3, tamanho_total);    
+			printf ("\nDigite o tamanho do polinomio 2\n");
+            scanf("%d", &tamanho);
+			printf ("\nDigite os valores do polinomio seguidos pelo expoente\n");
+            	while (tamanho--){
+					add_num (operacao);
+				}
+       
+
+    imprime_polinomio (polinomio_1);   
     }
 }
  
-void le_polinomio (polinomios *polinomio, int tamanho){
+void le_polinomio (polinomios *polinomio){
     int cont_1;
  
-    for (cont_1 = 0; cont_1 < tamanho; cont_1++){
+    for (cont_1 = 0; cont_1 < posicao; cont_1++){
         scanf("%f", &polinomio[cont_1].coeficiente);
         scanf("%d", &polinomio[cont_1].expoente);
         }
 }
  
-void imprime_polinomio (polinomios *polinomio, int tamanho){
+void imprime_polinomio (polinomios *polinomio){
     int cont_1;
  
-    for (cont_1 = 0; cont_1 < tamanho; cont_1++){
+    for (cont_1 = 0; cont_1 < posicao; cont_1++){
  
         if (polinomio[cont_1].coeficiente >= 0){
             printf("+");
@@ -64,72 +66,29 @@ void imprime_polinomio (polinomios *polinomio, int tamanho){
         }
         printf("%.2f", polinomio[cont_1].coeficiente);
          if (polinomio[cont_1].expoente){
-                printf("X^%d",polinomio[cont_1].expoente);
+                printf("^%d ",polinomio[cont_1].expoente);
          }
     }
     printf("\n");
 }
- 
-int soma_polinomio (int tam_poli_1, int tam_poli_2){
-    int cont_1 = 0, cont_2 = 0, posicao = 0;
- 
-    while (cont_1 < tam_poli_1 && cont_2 < tam_poli_2){
-        if (polinomio_1[cont_1].expoente > polinomio_2[cont_2].expoente){
-            polinomio_3[posicao++] = polinomio_1[cont_1];
-            cont_1++;
-        }
-            else {
-                if (polinomio_2[cont_2].expoente > polinomio_1[cont_1].expoente){
-                polinomio_3[posicao++] = polinomio_2[cont_2];
-                cont_2++;
-                }
-                else if (polinomio_1[cont_1].expoente == polinomio_2[cont_2].expoente){
-                    polinomio_3[posicao].coeficiente = (polinomio_1[cont_1].coeficiente + polinomio_2[cont_2].coeficiente);
-                    polinomio_3[posicao++].expoente = polinomio_1[cont_1].expoente;
-                    cont_1++;
-                    cont_2++;
-                }
-            }
-    }
- 
-        for (;cont_1 < tam_poli_1; cont_1++){
-            polinomio_3[posicao++] = polinomio_1[cont_1];
-        }
-        for (;cont_2 < tam_poli_2; cont_2++){
-            polinomio_3[posicao++] = polinomio_2[cont_2];
-        }
-    return(posicao);
-           
+int add_num (char operacao){
+	int cont_1;
+	polinomios aux;
+	
+	scanf("%f", &aux.coeficiente);
+    scanf("%d", &aux.expoente);
+	for (cont_1 = 0; cont_1 < posicao; cont_1++){
+		if (aux.expoente == polinomio_1[cont_1].expoente){
+			if (operacao == '+'){
+				polinomio_1[cont_1].coeficiente += aux.coeficiente;
+			}
+			else if (operacao == '-'){
+				polinomio_1[cont_1].coeficiente -= aux.coeficiente;
+			}
+			return (1);
+		}
+	}
+	polinomio_1[posicao++] = aux;
 }
-int subtrai_polinomio (int tam_poli_1, int tam_poli_2){
-int cont_1 = 0, cont_2 = 0, posicao = 0;
- 
-    while (cont_1 < tam_poli_1 && cont_2 < tam_poli_2){
-        if (polinomio_1[cont_1].expoente > polinomio_2[cont_2].expoente){
-            polinomio_3[posicao++] = polinomio_1[cont_1];
-            cont_1++;
-        }
-            else {
-                if (polinomio_2[cont_2].expoente > polinomio_1[cont_1].expoente){
-                polinomio_3[posicao++] = polinomio_2[cont_2];
-                polinomio_3[posicao].coeficiente *= -1;
-                cont_2++;
-                }
-                else if (polinomio_1[cont_1].expoente == polinomio_2[cont_2].expoente){
-                    polinomio_3[posicao].coeficiente = (polinomio_1[cont_1].coeficiente - polinomio_2[cont_2].coeficiente);
-                    polinomio_3[posicao++].expoente = polinomio_1[cont_1].expoente;
-                    cont_1++;
-                    cont_2++;
-                }
-            }
-    }
- 
-        for (;cont_1 < tam_poli_1; cont_1++){
-            polinomio_3[posicao++] = polinomio_1[cont_1];
-        }
-        for (;cont_2 < tam_poli_2; cont_2++){
-            polinomio_3[posicao++] = polinomio_2[cont_2];
-        }
-    return(posicao);
-           
-}
+	
+	
